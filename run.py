@@ -19,5 +19,6 @@ if __name__ == '__main__':
         '-p pytest_ordering',
         '--alluredir=./allure-results/{}'.format(formatted_time),  # allure报告生成
         '--clean-alluredir',  # 如果allure报告的目录已存在则清除
+        # '--base_url=http://baidu.com'
     ])
     # os.popen("allure serve ./allure-results/{}".format(formatted_time))

@@ -1,10 +1,13 @@
 import os
+import sys
 import pytest
 import allure
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from utils.driver_manager import DriverManager
 from utils.config_reader import ConfigReader
-from pages.user_page.base_page import BasePage
+config = ConfigReader().get_config()
 
 driver = None
 # Fixture: 初始化 WebDriver
@@ -12,13 +15,16 @@ driver = None
 def get_driver():
     global driver
     driver = DriverManager.get_driver()
-    driver.get("http://localhost")
-    driver.maximize_window()
+    # url = base_url if base_url else config['application']['url']
+    driver.get(config['application']['url'])
     driver.implicitly_wait(10)
-    base_page = BasePage(driver)
-    base_page.switch_to_cn()
     yield driver
     DriverManager.quit_driver()
+
+
+@pytest.fixture
+def base_url(request):
+    return request.config.getoption("--base_url")  # 从命令行读取URL
 
 
 # Fixture: 读取测试数据
@@ -55,6 +61,13 @@ def pytest_runtest_makereport(item, call):
             with allure.step('添加失败截图...'):
                 allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
 
-
+# conftest.py
+def pytest_addoption(parser):
+    parser.addoption(
+        "--base-url",
+        action="store",
+        default=None,  # 设置默认值
+        help="Base URL for the application"
+    )
 if __name__ == '__main__':
     pass

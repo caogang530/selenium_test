@@ -1,4 +1,4 @@
-from .base_page import BasePage
+from ..base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
@@ -13,6 +13,7 @@ element_dict = {
 class HomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
+        self.switch_to_cn()
 
     def go_to_login_register(self):
         user_icon = self.driver.find_element(*element_dict["登录注册图标"])

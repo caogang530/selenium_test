@@ -2,7 +2,8 @@ import time
 
 from pages.admin_page.admin_login_page import AdminLoginPage
 from pages.admin_page.admin_home_page import AdminHomePage
-from utils import config
+from utils.config_reader import ConfigReader
+config = ConfigReader().get_config()
 
 
 

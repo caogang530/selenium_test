@@ -1,3 +1,4 @@
+from ..base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
@@ -8,7 +9,7 @@ ele_dict = {
     "商品": (By.LINK_TEXT, "商品"),
     # 客户模块下的元素
     "客户": (By.LINK_TEXT, "客户"),
-    "客户列表": (By.LINK_TEXT, "客户列表"),
+    "客户管理": (By.LINK_TEXT, "客户管理"),
     "客户组": (By.LINK_TEXT, "客户组"),
     "回收站": (By.LINK_TEXT, "回收站"),
 
@@ -22,8 +23,9 @@ ele_dict = {
 }
 
 
-class AdminHomePage(object):
+class AdminHomePage(BasePage):
     def __init__(self, driver):
+        super().__init__(driver)
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 5, 0.3)
 
@@ -31,7 +33,7 @@ class AdminHomePage(object):
         self.wait.until(EC.visibility_of_element_located(ele_dict['客户'])).click()
 
     def click_customer_list(self):
-        self.wait.until(EC.visibility_of_element_located(ele_dict['客户列表'])).click()
+        self.wait.until(EC.visibility_of_element_located(ele_dict['客户管理'])).click()
 
     def click_recycle_bin(self):
         self.wait.until(EC.visibility_of_element_located(ele_dict['回收站'])).click()

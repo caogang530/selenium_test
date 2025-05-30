@@ -1,10 +1,15 @@
 import configparser
 import os
 
-
 class ConfigReader:
-    def __init__(self, config_file="E:\PycharmProjects\selenium_test\config\config.ini"):
+    def __init__(self, config_file=None):
         self.config_reader = configparser.ConfigParser()
+        # 修复路径：基于项目根目录定位配置文件
+        if not config_file:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(current_dir)  # utils的上级目录是项目根目录
+            config_file = os.path.join(project_root, 'config', 'config.ini')
+
         self.config_file = config_file
         self.config = {}
         self.parser_config()
@@ -23,3 +28,6 @@ class ConfigReader:
             print("全部配置：", self.config)
         except Exception as e:
             raise Exception(f"Error reading config file '{self.config_file}': {e}")
+
+    def get_config(self):
+        return self.config
