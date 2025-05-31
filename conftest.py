@@ -3,7 +3,8 @@ import sys
 import pytest
 import allure
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 
 from utils.driver_manager import DriverManager
 from utils.config_reader import ConfigReader
