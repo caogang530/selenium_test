@@ -16,7 +16,7 @@ WORKDIR /app
 
 # 克隆项目
 RUN git clone https://github.com/caogang530/selenium_test.git . \
-    && git checkout featch/likeshop
+    && git checkout 48b8c5ebd78ba50eda6f09012e40c36b2ad35336
 
 # 安装 Python 依赖
 RUN pip3 install --no-cache-dir -r requirements.txt
