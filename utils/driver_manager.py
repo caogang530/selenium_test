@@ -41,11 +41,11 @@ class DriverManager:
             options.add_experimental_option("excludeSwitches", ["enable-automation"])
             options.add_experimental_option('useAutomationExtension', False)
 
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        project_root = os.path.dirname(current_dir)  # utils的上级目录是项目根目录
-        config_file = os.path.join(project_root, 'resources', 'browser_drivers', 'chromedriver.exe')
-        service = Service(executable_path=config_file)
-        return webdriver.Chrome(service=service, options=options)
+        # current_dir = os.path.dirname(os.path.abspath(__file__))
+        # project_root = os.path.dirname(current_dir)  # utils的上级目录是项目根目录
+        # config_file = os.path.join(project_root, 'resources', 'browser_drivers', 'chromedriver.exe')
+        # service = Service(executable_path=config_file)
+        return webdriver.Chrome(options=options)
 
     @classmethod
     def create_firefox_driver(cls):
